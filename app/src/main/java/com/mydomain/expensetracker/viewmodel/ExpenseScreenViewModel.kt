@@ -1,6 +1,7 @@
 package com.mydomain.expensetracker.viewmodel
 
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
@@ -27,6 +28,9 @@ class ExpenseScreenViewModel(val dao: ExpenseDao) : ViewModel() {
     private var _description = MutableStateFlow<String>("")
     val description = _description.asStateFlow()
 
+    private val _transactionType = MutableStateFlow("Debit")
+
+    val transactionType =_transactionType.asStateFlow();
 
     private var _dateOfExpense= MutableStateFlow<Long>(System.currentTimeMillis())
 
@@ -35,6 +39,10 @@ class ExpenseScreenViewModel(val dao: ExpenseDao) : ViewModel() {
     val showDatePicker = _showDatePicker.asStateFlow()
 
 
+    fun setTransactionType(type:String)
+    {
+        _transactionType.value=type
+    }
 
     fun setExpense(expense: String) {
         _expense.value = expense
@@ -54,14 +62,14 @@ class ExpenseScreenViewModel(val dao: ExpenseDao) : ViewModel() {
     }
 
     fun toggleShowDatePicker() {
+        Log.d("sfsfs","something happening")
        _showDatePicker.value=_showDatePicker.value.not()
-
     }
 
     fun saveExpense() {
         try {
             val expense = Expense(
-                amount = Integer.parseInt(_expense.value),
+                amount = _expense.value.toDouble(),
                 dateOfExpense = _dateOfExpense.value,
                 category = _description.value,
             )
