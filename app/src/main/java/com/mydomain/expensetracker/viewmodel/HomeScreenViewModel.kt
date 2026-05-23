@@ -2,7 +2,7 @@ package com.mydomain.expensetracker.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mydomain.expensetracker.UiState
+import com.mydomain.expensetracker.enums.UiState
 import com.mydomain.expensetracker.dao.ExpenseDao
 import com.mydomain.expensetracker.entities.Expense
 import kotlinx.coroutines.flow.MutableStateFlow

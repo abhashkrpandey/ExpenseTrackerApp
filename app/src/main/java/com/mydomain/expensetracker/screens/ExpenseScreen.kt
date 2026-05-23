@@ -214,28 +214,28 @@ fun ExpenseScreen(navController: NavController) {
             {
                 ExpenseButton(
                     {
-                        expenseScreenViewModel.setTransactionType(TransactionType.CREDIT.text)
+                        expenseScreenViewModel.setTransactionType(TransactionType.CREDIT)
                     },
                     TransactionType.CREDIT.text,
-                    contentColor = if (transactionType.value != TransactionType.CREDIT.text) Color.Gray else White,
-                    containerColor = if (transactionType.value != TransactionType.CREDIT.text) White else Color.Gray,
+                    contentColor = if (transactionType.value != TransactionType.CREDIT) Color.Gray else White,
+                    containerColor = if (transactionType.value != TransactionType.CREDIT) White else Color.Gray,
                 )
                 ExpenseButton(
                     {
-                        expenseScreenViewModel.setTransactionType(TransactionType.DEBIT.text)
+                        expenseScreenViewModel.setTransactionType(TransactionType.DEBIT)
                     },
                     TransactionType.DEBIT.text,
-                    contentColor = if (transactionType.value != TransactionType.DEBIT.text) Color.Gray else White,
-                    containerColor = if (transactionType.value != TransactionType.DEBIT.text) White else Color.Gray,
+                    contentColor = if (transactionType.value != TransactionType.DEBIT) Color.Gray else White,
+                    containerColor = if (transactionType.value != TransactionType.DEBIT) White else Color.Gray,
                 )
-                ExpenseButton(
-                    {
-                        expenseScreenViewModel.setTransactionType(TransactionType.SPLIT.text)
-                    },
-                    TransactionType.SPLIT.text,
-                    contentColor = if (transactionType.value != TransactionType.SPLIT.text) Color.Gray else White,
-                    containerColor = if (transactionType.value != TransactionType.SPLIT.text) White else Color.Gray,
-                )
+//                ExpenseButton(
+//                    {
+//                        expenseScreenViewModel.setTransactionType(TransactionType.SPLIT)
+//                    },
+//                    TransactionType.SPLIT.text,
+//                    contentColor = if (transactionType.value != TransactionType.SPLIT) Color.Gray else White,
+//                    containerColor = if (transactionType.value != TransactionType.SPLIT) White else Color.Gray,
+//                )
 
             }
             if (showDatePicker.value) {

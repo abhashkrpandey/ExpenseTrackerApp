@@ -40,11 +40,12 @@ import androidx.navigation.compose.rememberNavController
 import com.mydomain.expensetracker.Green10
 import com.mydomain.expensetracker.Green5
 import com.mydomain.expensetracker.Routes
-import com.mydomain.expensetracker.UiState
+import com.mydomain.expensetracker.enums.UiState
 import com.mydomain.expensetracker.White10
 import com.mydomain.expensetracker.White5
 import com.mydomain.expensetracker.database.AppDatabase
 import com.mydomain.expensetracker.entities.Expense
+import com.mydomain.expensetracker.enums.TransactionType
 import com.mydomain.expensetracker.ui.theme.ExpenseTrackerTheme
 import com.mydomain.expensetracker.utils.monthArray
 import com.mydomain.expensetracker.viewModelFactories.HomeViewModelFactory
@@ -57,6 +58,7 @@ fun HomeScreen(navController: NavController) {
     var context = LocalContext.current
     val appDatabase = AppDatabase.getInstance(context);
     val dao = appDatabase.expenseDao()
+
     val factory = HomeViewModelFactory(dao)
     val viewModel: HomeScreenViewModel = viewModel(factory = factory)
     val uiState = viewModel.uiState.collectAsState()
@@ -171,14 +173,25 @@ fun ExpenseRow(item: Expense, month: String) {
             .padding(vertical = 6.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
+        Column()
+        {
+            Text(
+                text = item.description,
+                style = MaterialTheme.typography.bodyLarge,
+                fontSize = 20.sp
+            )
+            Spacer(modifier = Modifier.height(10.dp))
         Text(
             text = "${date} ${monthArray[Integer.parseInt(month) - 1]}",
-            style = MaterialTheme.typography.bodyLarge
+            style = MaterialTheme.typography.bodyLarge,
+            fontSize = 20.sp
         )
+        }
         Text(
-            text = item.amount.toString(),
+            text = if(item.transactionType== TransactionType.CREDIT) "+${item.amount}" else "-${item.amount}",
             style = MaterialTheme.typography.bodySmall,
-            color = Color.Gray
+            color = if(item.transactionType== TransactionType.CREDIT) Green5 else Color.Red,
+            fontSize = 20.sp
         )
     }
     Spacer(modifier = Modifier.height(10.dp))
