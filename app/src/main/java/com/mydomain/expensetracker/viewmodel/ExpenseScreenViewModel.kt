@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mydomain.expensetracker.dao.ExpenseDao
 import com.mydomain.expensetracker.entities.Expense
+import com.mydomain.expensetracker.enums.TransactionType
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -28,7 +29,7 @@ class ExpenseScreenViewModel(val dao: ExpenseDao) : ViewModel() {
     private var _description = MutableStateFlow<String>("")
     val description = _description.asStateFlow()
 
-    private val _transactionType = MutableStateFlow("Debit")
+    private val _transactionType = MutableStateFlow(TransactionType.DEBIT)
 
     val transactionType =_transactionType.asStateFlow();
 
@@ -39,7 +40,7 @@ class ExpenseScreenViewModel(val dao: ExpenseDao) : ViewModel() {
     val showDatePicker = _showDatePicker.asStateFlow()
 
 
-    fun setTransactionType(type:String)
+    fun setTransactionType(type: TransactionType)
     {
         _transactionType.value=type
     }
@@ -71,7 +72,8 @@ class ExpenseScreenViewModel(val dao: ExpenseDao) : ViewModel() {
             val expense = Expense(
                 amount = _expense.value.toDouble(),
                 dateOfExpense = _dateOfExpense.value,
-                category = _description.value,
+                description = _description.value,
+                transactionType = _transactionType.value,
             )
             viewModelScope.launch {
                 dao.insertExpense(expense)
