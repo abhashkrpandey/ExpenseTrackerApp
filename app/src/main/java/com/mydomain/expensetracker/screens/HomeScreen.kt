@@ -52,6 +52,7 @@ import com.mydomain.expensetracker.viewModelFactories.HomeViewModelFactory
 import com.mydomain.expensetracker.viewmodel.HomeScreenViewModel
 import java.text.SimpleDateFormat
 import java.util.Date
+import com.mydomain.expensetracker.utils.ErrorContent
 
 @Composable
 fun HomeScreen(navController: NavController) {
@@ -198,10 +199,7 @@ fun ExpenseRow(item: Expense, month: String) {
 
 }
 
-@Composable
-fun ErrorContent() {
-    Text(text = "Sorry some error occured")
-}
+
 
 
 @Preview(showSystemUi = true)
